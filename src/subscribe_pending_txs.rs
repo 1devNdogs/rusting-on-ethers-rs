@@ -11,7 +11,10 @@ pub async fn run() -> anyhow::Result<()> {
     let mut stream = provider.subscribe_pending_txs().await?;
     
     while let Some(tx) = stream.next().await {
-        dbg!(tx);
+        println!("{}",tx);
+        let transaction = provider.get_transaction(tx).await?;
+        dbg!(transaction);
+
     }
 
     Ok(())

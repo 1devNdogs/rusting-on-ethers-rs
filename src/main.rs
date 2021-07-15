@@ -1,5 +1,7 @@
-mod blocks;
-mod pending;
+mod watch_blocks;
+mod subscribe_blocks;
+mod subscribe_pending_txs;
+mod watch_pending_transactions;
 
 use futures::executor::block_on;
 
@@ -14,8 +16,12 @@ async fn main()  {
 
 async fn async_main() {
 
-    let async_one = blocks::run();
-    let async_two = pending::run();
+    let async_one = subscribe_blocks::run();
+    let async_two = subscribe_pending_txs::run();
+    let async_three = watch_blocks::run();
+    let async_four = watch_pending_transactions::run();
 
-    futures::join!(async_one, async_two);
+    futures::join!(async_two);
+//    futures::join!(async_one, async_two, async_three, async_four);
+
 }
