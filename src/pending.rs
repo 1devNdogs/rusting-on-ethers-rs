@@ -10,8 +10,8 @@ pub async fn run() -> anyhow::Result<()> {
     let provider = Provider::new(ws).interval(Duration::from_millis(2000));
     let mut stream = provider.subscribe_pending_txs().await?;
     
-    while let Some(block) = stream.next().await {
-        dbg!(block);
+    while let Some(tx) = stream.next().await {
+        dbg!(tx);
     }
 
     Ok(())
